@@ -1,0 +1,90 @@
+# Kode Program Inferensi Bayesian Untuk Peluang Gempa Bumi Berdasarkan Wilayah Bagian Provinsi Jawa Timur
+
+# definisikan alpha prior
+alpha_prior <- 6
+
+# definisikan beta prior
+beta_prior <- 359
+
+# definisikan jumlah hari tahun 2015 hingga 2024
+N <- 3652
+
+# ============================================
+# WILAYAH BAGIAN 1
+# ============================================
+
+# definisikan jumlah kejadian gempa tahun 2015 hingga 2024 pada wilayah bagian satu
+k_1 <- 379
+
+# menghitung alpha posterior untuk wilayah bagian satu
+alpha_posterior <- alpha_prior + k_1
+
+# menghitung beta posterior untuk wilayah bagian satu
+beta_posterior <- beta_prior + (N - k_1)
+
+# menghitung mean posterior untuk wilayah bagian satu
+mean_posterior_1 <- alpha_posterior / (alpha_posterior + beta_posterior)
+
+# menampilkan mean posterior untuk wilayah bagian satu
+mean_posterior_1
+
+# ============================================
+# WILAYAH BAGIAN 2
+# ============================================
+
+# definisikan jumlah kejadian gempa tahun 2015 hingga 2024 pada wilayah bagian dua
+k_2 <- 20
+
+# menghitung alpha posterior untuk wilayah bagian dua
+alpha_posterior <- alpha_prior + k_2
+
+# menghitung beta posterior untuk wilayah bagian dua
+beta_posterior <- beta_prior + (N - k_2)
+
+# menghitung mean posterior untuk wilayah bagian dua
+mean_posterior_2 <- alpha_posterior / (alpha_posterior + beta_posterior)
+
+# menampilkan mean posterior untuk wilayah bagian dua
+mean_posterior_2
+
+# ============================================
+# WILAYAH BAGIAN 3
+# ============================================
+
+# definisikan jumlah kejadian gempa tahun 2015 hingga 2024 pada wilayah bagian tiga
+k_3 <- 155
+
+# menghitung alpha posterior untuk wilayah bagian tiga
+alpha_posterior <- alpha_prior + k_3
+
+# menghitung beta posterior untuk wilayah bagian tiga
+beta_posterior <- beta_prior + (N - k_3)
+
+# menghitung mean posterior untuk wilayah bagian tiga
+mean_posterior_3 <- alpha_posterior / (alpha_posterior + beta_posterior)
+
+# menampilkan mean posterior untuk wilayah bagian tiga
+mean_posterior_3
+
+# ============================================
+# VISUALISASI
+# ============================================
+
+# memanggil packages untuk membuat plot distribusi mean posterior peluang gempa wilayah bagian
+library(ggplot2)
+
+# definisikan data frame
+data <- data.frame(
+  kategori = c("Peluang Wilayah 1", "Peluang Wilayah 2", "Peluang Wilayah 3"),
+  mean_posterior = c(0.0960, 0.0067, 0.0403)
+)
+
+# membangun plot distribusi mean posterior peluang gempa wilayah bagian
+ggplot(data, aes(x = kategori, y = mean_posterior)) +
+  geom_point(size = 5, color = "blue") +
+  labs(
+    title = "Distribusi Peluang Kejadian Gempa Bumi Berdasarkan Wilayah Bagian",
+    x = "Kategori",
+    y = "Mean Posterior Wilayah Bagian"
+  ) +
+  theme_minimal()
