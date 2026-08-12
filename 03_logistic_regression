@@ -1,0 +1,75 @@
+Kode Program Uji Signifikansi Regresi Logistik
+
+# memanggil data dari excel
+data <- read.delim("clipboard")
+
+# menampilkan data dari excel
+data
+
+# memanggil packages untuk model regresi logistik
+library(brglm2)
+
+# definisikan variabel lokasi gempa sebagai numerik
+data$KD_numeric <- as.numeric(as.factor(data$KD))
+
+# ============================================
+# MODEL REGRESI LOGISTIK 1
+# ============================================
+
+# membangun model regresi logistik yang pertama
+model_firth <- glm(Y ~ MG + DP + LS + BT + KD_numeric,
+                   data = data,
+                   family = binomial("logit"),
+                   method = "brglmFit")
+
+# menampilkan hasil model regresi logistik yang pertama
+summary(model_firth)
+
+# ============================================
+# MODEL REGRESI LOGISTIK 2
+# ============================================
+
+# membangun model regresi logistik yang kedua
+model_firth <- glm(Y ~ MG + DP + BT + KD_numeric,
+                   data = data,
+                   family = binomial("logit"),
+                   method = "brglmFit")
+
+# menampilkan hasil model regresi logistik yang kedua
+summary(model_firth)
+
+# ============================================
+# MODEL REGRESI LOGISTIK 3
+# ============================================
+
+# membangun model regresi logistik yang ketiga
+model_firth <- glm(Y ~ MG + DP + BT,
+                   data = data,
+                   family = binomial("logit"),
+                   method = "brglmFit")
+
+# menampilkan hasil model regresi logistik yang ketiga
+summary(model_firth)
+
+# ============================================
+# MODEL REGRESI LOGISTIK 4
+# ============================================
+
+# membangun model regresi logistik yang keempat
+model_firth <- glm(Y ~ MG + DP,
+                   data = data,
+                   family = binomial("logit"),
+                   method = "brglmFit")
+
+# menampilkan hasil model regresi logistik yang keempat
+summary(model_firth)
+
+# ============================================
+# UJI MULTIKOLINIERITAS
+# ============================================
+
+# memanggil packages untuk uji multikolinieritas
+library(car)
+
+# pengujian multikolinieritas model regresi logistik yang keempat
+vif(model_firth)
