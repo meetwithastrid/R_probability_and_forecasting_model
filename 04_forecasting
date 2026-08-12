@@ -1,0 +1,30 @@
+# Kode Program Prediksi Dengan Regresi Logistik Menggunakan Model Terbaik
+
+# memanggil packages untuk model prediksi
+library(glmnet)
+
+# definisikan variabel X
+X <- as.matrix(data[, c("MG", "DP")])
+
+# definisikan variabel Y sebagai numerik
+Y <- as.numeric(data$Y)
+
+# menjalankan model regresi logistik ridge
+ridge_model <- cv.glmnet(X, Y, family = "binomial", alpha = 0)
+
+# menampilkan koefisien model pada lambda optimal
+coef(ridge_model, s = "lambda.min")
+
+# melakukan prediksi
+prediksi_peluang_gempa_bumi <- predict(ridge_model, X, type = "response", s = "lambda.min")
+
+# menampilkan ringkasan statistik dari hasil prediksi
+summary(prediksi_peluang_gempa_bumi)
+
+# membuat histogram distribusi prediksi
+hist(prediksi_peluang_gempa_bumi,
+     breaks = 30,
+     main = "Distribusi Peluang Untuk Prediksi Gempa Bumi")
+
+# menampilkan prediksi untuk keseluruhan data
+print(prediksi_peluang_gempa_bumi)
