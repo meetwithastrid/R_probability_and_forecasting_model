@@ -37,7 +37,7 @@ Model regresi logistik terbaik mencapai **AIC = 6**, dengan variabel *magnitude*
 Visualisasi akhir berupa *bubble plot* yang merangkum hasil prediksi peluang gempa dari model regresi logistik tersedia dalam file `05_forecasting_plot.ipynb`.
 
 # Implementasi Kode
-Kode dalam penelitian ini tersebar dalam 5 file R dan 1 file Python (Google Colaboratory):
+Kode dalam penelitian ini tersebar dalam 4 file R dan 1 file Python (Google Colaboratory):
 
 **R:**
 - `01_bayesian` - Inferensi Bayesian untuk peluang gempa harian
